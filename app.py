@@ -4,7 +4,20 @@ import csv
 import os
 
 app = Flask(__name__)
+
 DB_NAME = 'inventory.db'
+
+def init_db():
+    with sqlite3.connect(DB_NAME) as conn:
+        conn.execute('''CREATE TABLE IF NOT EXISTS inventory (
+                            barcode TEXT PRIMARY KEY,
+                            name TEXT,
+                            cost REAL,
+                            quantity INTEGER
+                        )''')
+
+# ✅ Ensure DB is initialized even when using Gunicorn
+init_db()
 
 TEMPLATE_HOME = '''
 <h1>Inventory System</h1>
@@ -30,15 +43,6 @@ TEMPLATE_FORM = '''
 </form>
 <a href="/">Back to Inventory</a>
 '''
-
-def init_db():
-    with sqlite3.connect(DB_NAME) as conn:
-        conn.execute('''CREATE TABLE IF NOT EXISTS inventory (
-                            barcode TEXT PRIMARY KEY,
-                            name TEXT,
-                            cost REAL,
-                            quantity INTEGER
-                        )''')
 
 @app.route('/')
 def index():
@@ -87,5 +91,4 @@ def export():
     return f"Exported to {filename}. <a href='/'>Back</a>"
 
 if __name__ == '__main__':
-    init_db()
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
