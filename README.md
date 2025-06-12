@@ -1,1 +1,2 @@
-Full working version. Push this to GitHub and deploy on Render.
+# Bhurst Collectors Inventory
+Deploy to Render. Login: admin/password
