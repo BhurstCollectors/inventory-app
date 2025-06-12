@@ -10,5 +10,5 @@
 
 ## Deploy Instructions
 1. Unzip this folder
-2. Push contents to a GitHub repo
-3. Connect to Render and deploy
+2. Push everything (including inventory.db) to GitHub
+3. Deploy using Render
