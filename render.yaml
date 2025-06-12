@@ -1,7 +1,6 @@
 services:
   - type: web
-    name: inventory-app
+    name: bhurst-collectors
     env: python
-    buildCommand: ""
+    buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
-    plan: free
