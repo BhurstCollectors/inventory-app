@@ -1,14 +1,2 @@
-# Bhurst Collectors Inventory System
-
-## Features
-- Inventory CRUD for trading cards
-- Custom fields (set, rarity, condition, grading, language)
-- Barcode scanning (USB and camera)
-- Image upload
-- CSV import/export
-- Dashboard, login system, sales log
-
-## Deploy Instructions
-1. Unzip this folder
-2. Push everything (including inventory.db) to GitHub
-3. Deploy using Render
+# Bhurst Collectors System
+Now fixed and ready to deploy!
