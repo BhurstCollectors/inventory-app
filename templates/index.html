@@ -1,1 +1,41 @@
-<!-- Inventory Dashboard HTML -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bhurst Collectors Inventory</title>
+    <style>
+        body { font-family: Arial; background: #f9f9f9; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+        th { background-color: #eee; }
+    </style>
+</head>
+<body>
+    <h1>Bhurst Collectors Inventory</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Set</th>
+                <th>Rarity</th>
+                <th>Grading</th>
+                <th>Qty</th>
+                <th>Cost</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>{{ item[5] }}</td>
+                <td>{{ item[7] }}</td>
+                <td>${{ item[8] }}</td>
+                <td>${{ item[9] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

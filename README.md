@@ -1,2 +1,1 @@
-# Bhurst Collectors System
-Now fixed and ready to deploy!
+Full working version. Push this to GitHub and deploy on Render.
