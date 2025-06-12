@@ -1,9 +1,10 @@
+
 from flask import Flask, render_template, request, redirect, url_for, session, g
 import sqlite3
 import os
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key'
+app.secret_key = 'super-secret-key'
 DATABASE = 'inventory.db'
 
 def get_db():
@@ -21,26 +22,35 @@ def close_connection(exception):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user = request.form['username']
-        pw = request.form['password']
-        if user == 'admin' and pw == 'password':
+        if request.form['username'] == 'admin' and request.form['password'] == 'password':
             session['logged_in'] = True
-            return redirect('/')
+            return redirect(url_for('index'))
     return render_template('login.html')
 
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect('/login')
+    return redirect(url_for('login'))
 
 @app.route('/')
 def index():
     if not session.get('logged_in'):
-        return redirect('/login')
+        return redirect(url_for('login'))
     conn = get_db()
-    cursor = conn.execute("SELECT * FROM inventory")
-    items = cursor.fetchall()
-    return render_template("index.html", items=items)
+    items = conn.execute("SELECT * FROM inventory").fetchall()
+    return render_template('index.html', items=items)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    if request.method == 'POST':
+        name = request.form['name']
+        set_name = request.form['set']
+        qty = request.form['qty']
+        cost = request.form['cost']
+        conn = get_db()
+        conn.execute("INSERT INTO inventory (name, set_name, quantity, cost) VALUES (?, ?, ?, ?)", (name, set_name, qty, cost))
+        conn.commit()
+        return redirect(url_for('index'))
+    return render_template('add.html')

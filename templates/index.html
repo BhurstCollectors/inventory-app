@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head><title>Inventory</title></head>
-<body>
+
 <h1>Inventory</h1>
+<a href="/logout">Logout</a> | <a href="/add">Add Item</a>
 <table border="1">
 <tr><th>Name</th><th>Set</th><th>Qty</th><th>Cost</th></tr>
 {% for item in items %}
-<tr>
-<td>{{ item[1] }}</td>
-<td>{{ item[2] }}</td>
-<td>{{ item[7] }}</td>
-<td>${{ item[8] }}</td>
-</tr>
+<tr><td>{{ item[1] }}</td><td>{{ item[2] }}</td><td>{{ item[3] }}</td><td>${{ item[4] }}</td></tr>
 {% endfor %}
 </table>
-<a href="/logout">Logout</a>
-</body>
-</html>
